@@ -1,0 +1,124 @@
+/*----------------------------Positionnements : ChatGPT avec modifications---------------------------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+/* Barre du haut */
+header {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Conteneur principal */
+main {
+    display: flex;
+    flex: 1;
+}
+
+/* Barre de gauche */
+.left-container {
+    background: #444444;
+    color: white;
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Contenu principal */
+.content {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Barre de droite */
+.nav-right {
+    background: #555;
+    color: white;
+    width: 10%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Barre du bas */
+footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Liens de navigation */
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    width: 100%;
+}
+
+.nav a:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/*----------------------------Gauche Contacts positionnements----------------------------*/
+.left-contacts-container {
+    flex-grow: 10;
+    text-align: center;
+    overflow-y: auto;
+    max-height: 87.5%;
+}
+
+.left-contact-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #44444400;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.left-contact-link img {
+    border-radius: 100%;
+    width: 15%;
+    height: auto;
+}
+
+/*----------------------------Gauche Raccourcis positionnements----------------------------*/
+.left-shortcuts-container {
+    flex-grow: 1;
+    background-color: #7979797e;
+    margin: 0% 2%;
+    border-radius: 3.5%;
+}
+
+.left-profile-container {
+    display: flex;
+    align-items: center;
+    gap : 20px;
+}
+
+.left-shortcuts-container img {
+    border-radius: 100%;
+    width: 20%;
+    height: auto;
+}
