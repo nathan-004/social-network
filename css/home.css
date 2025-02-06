@@ -1,3 +1,9 @@
+/*----------------------------Général----------------------------*/
+a {
+	text-decoration: none;
+	color: black;
+}
+
 /*----------------------------Positionnements : ChatGPT avec modifications---------------------------------*/
 
 * {
@@ -39,7 +45,7 @@ main {
 }
 
 /* Contenu principal */
-.content {
+.mid-container {
     flex: 1;
     padding: 20px;
     text-align: center;
@@ -121,4 +127,21 @@ footer {
     border-radius: 100%;
     width: 20%;
     height: auto;
+}
+
+/*----------------------------Milieu Contact Profil----------------------------*/
+.mid-contact-container {
+	display: flex;
+	align-items: center;
+	gap: 5%;
+}
+
+.mid-contact-container img {
+	width: 10%;
+	height: auto;
+	border-radius: 100%;
+}
+
+.mid-contact-container p {
+	font-size: 250%;
 }
