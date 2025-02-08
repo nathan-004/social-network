@@ -47,8 +47,11 @@ main {
 /* Contenu principal */
 .mid-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
-    text-align: center;
+    height: 100vh; /* Peut être problématique */
+    min-height: 0; /* Important pour le scroll */
 }
 
 /* Barre de droite */
@@ -128,20 +131,104 @@ footer {
     width: 20%;
     height: auto;
 }
+/*----------------------------Milieu----------------------------*/
+
+/*----------------------------Milieu Top----------------------------*/
+.mid-top-container {
+    display: flex;
+}
 
 /*----------------------------Milieu Contact Profil----------------------------*/
-.mid-contact-container {
+.mid-top-contact-container {
+    flex-grow: 1;
 	display: flex;
 	align-items: center;
 	gap: 5%;
 }
 
-.mid-contact-container img {
-	width: 10%;
+.mid-top-contact-container img {
+	width: 7%;
 	height: auto;
 	border-radius: 100%;
 }
 
-.mid-contact-container p {
-	font-size: 250%;
+.mid-top-contact-container p {
+	font-size: 200%;
+}
+
+/*----------------------------Milieu Top Shortcuts----------------------------*/
+.mid-top-shortcuts-container {
+    flex-grow: 1;
+}
+
+/*----------------------------Milieu Messages----------------------------*/
+.mid-messages-container {
+    padding: 1%;
+    background-color: #3d3d3d;
+    overflow-y: auto;
+    height: 80%;
+    max-height: 80%;  
+    min-height: 0; 
+}
+
+.message-container {
+    min-height: 0;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    padding-bottom: 0;
+    display: flex; /*Problème de direction des messages*/
+}
+
+.message-container * {
+    max-width: 45%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.left {
+    justify-content: left;
+    left: 0;
+}
+
+.left * {
+    background-color: #917a7a;
+    width: fit-content;
+}
+
+.right {
+    justify-content: right;
+    right: 0;
+}
+
+.right * {
+    background-color: #88979b;
+    width: fit-content;
+}
+
+/*----------------------------Milieu Envoi de messages----------------------------*/
+.mid-message-sender {
+    margin-top: 1%;
+    background: rgb(180, 180, 180);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 8px;
+    display: flex;
+}
+
+#message { /*Textarea*/
+    flex-grow: 5;
+    width: 80%;
+    height: 55px;
+    color: rgb(43, 39, 39); /* Texte blanc */
+    padding: 10px;
+    border-color: transparent;
+    font-size: 20px;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+}
+
+#send-message {
+    flex-grow: 1;
 }
