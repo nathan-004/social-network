@@ -55,15 +55,13 @@ main {
 }
 
 /* Barre de droite */
-.nav-right {
+.right-container {
     background: #555;
     color: white;
     width: 10%;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Barre du bas */
@@ -72,20 +70,6 @@ footer {
     color: white;
     padding: 10px;
     text-align: center;
-}
-
-/* Liens de navigation */
-.nav a {
-    color: white;
-    text-decoration: none;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    text-align: center;
-    width: 100%;
-}
-
-.nav a:hover {
-    background: rgba(255, 255, 255, 0.4);
 }
 
 /*----------------------------Gauche Contacts positionnements----------------------------*/
@@ -213,14 +197,19 @@ footer {
     background: rgb(180, 180, 180);
     border: 1px solid rgb(0, 0, 0);
     border-radius: 8px;
+    gap: 10px;
+}
+
+.mid-form-container {
     display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 #message { /*Textarea*/
-    flex-grow: 5;
-    width: 80%;
+    width: 90%;
     height: 55px;
-    color: rgb(43, 39, 39); /* Texte blanc */
+    color: rgb(43, 39, 39);
     padding: 10px;
     border-color: transparent;
     font-size: 20px;
@@ -230,5 +219,48 @@ footer {
 }
 
 #send-message {
+    height: 33%;
+    padding: 10px 15px;
+}
+
+/*----------------------------Droite Paramètres----------------------------*/
+/*Ajouter un nouveau contact via son identifiant----------------------------*/
+.right-add-contact {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-form-container {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.right-form-container input {
+    width: 60%;
+    outline: none;
+}
+
+.right-add-contact img {
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+}
+
+
+/*Accepter une demande de contact----------------------------*/
+.accept-contact-container {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.right-request-container {
+    display: flex;
+}
+
+.right-request-container img {
+    width: 15%;
 }
