@@ -93,20 +93,43 @@
 			<div class="mid-message-sender">
                 <!--Form pour envoyer un message-->
                 <form>
-                    <textarea id="message" name="message" placeholder="Ecrivez votre message..."></textarea>
-                    <button type="submit" id="send-message">Envoyer</button>
+                    <div class="mid-form-container">
+                        <textarea id="message" name="message" placeholder="Ecrivez votre message..."></textarea>
+                        <button type="submit" id="send-message">Envoyer</button>
+                    </div>
                 </form>
             </div>
-
-            
         </div>
 
         <!-- Barre de droite -->
-        <div class="nav-right nav">
-            <h3>Droite</h3>
-            <a href="#">Profil</a>
-            <a href="#">Paramètres</a>
-            <a href="#">Déconnexion</a>
+        <div class="right-container">
+            <!--Ajouter un contact-->
+            <div class="right-add-contact">
+                <form>
+                    <div class="right-form-container">
+                        <input type="text" id="profile-id" placeholder="ID du profil" required>
+                        <button type="submit" id="send-request">Envoyer</button>
+                    </div>
+                </form>
+                <p>Nom du profile</p>
+                <img src="https://imgs.search.brave.com/GkAIuY4uQSRlbLRd1mseDZNRj6Bx_rQEz2b-y_8gaf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJmLzE1/L2YyLzJmMTVmMmU4/YzY4OGIzMTIwZDNk/MjY0NjdiMDYzMzBj/LmpwZw" alt="Image de profile de l'utilisateur">
+                <div class="right-profile-check">
+                    <button>Envoyer</button>
+                    <button>Annuler</button>
+                </div>
+            </div>
+
+            <div class="accept-contact-container">
+                <div class="right-request-container">
+                    <img src="https://imgs.search.brave.com/GkAIuY4uQSRlbLRd1mseDZNRj6Bx_rQEz2b-y_8gaf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJmLzE1/L2YyLzJmMTVmMmU4/YzY4OGIzMTIwZDNk/MjY0NjdiMDYzMzBj/LmpwZw" alt="Image de profile de l'utilisateur">
+                    <p>Nom du profile</p>
+                    <div class="right-contact-accept">
+                        <button>Accepter</button>
+                        <button>Refuser</button>
+                    </div>
+                </div>
+                <p>Pas de demandes de contact pour le moment</p>
+            </div>
         </div>
     </main>
 
@@ -114,5 +137,6 @@
     <footer>
         <h2>Navigation Bas</h2>
     </footer>
+
 </body>
 </html>
