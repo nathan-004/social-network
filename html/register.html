@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta cha
+	rset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <title>Inscription</title>
+</head>
+<body>
+	<main>
+		<div class="container">
+			<h1>Inscription</h1>
+			<form id="loginForm" action="http://localhost:5000/envoie" method="GET">
+				<input type="text" id="username" placeholder="Nom d'utilisateur" required /><br/>
+				<input type="password" id="password" placeholder="Nouveau mot de passe" required /><br/>
+				<input type="submit" value="Se connecter" /><br/>
+			</form>
+			<div class="error-message" id="errorMessage" style="display: none;">Nom d'utilisateur ou mot de passe incorrect.</div>
+			<div class="register-link">
+				Déjà inscrit ? <a href="login.html">Connectez-vous ici</a>
+			</div>
+		</div>
+	</main>
+	<script src="../script/register.js"></script>
+</body>
+</html>
