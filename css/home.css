@@ -254,28 +254,13 @@ footer {
 /*Accepter une demande de contact----------------------------*/
 .accept-contact-container {
     flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
     overflow-y: scroll;
-	height: 50%;
-	overflow-y: scroll;
 }
 
 .right-request-container {
     display: flex;
-	gap: 5px;
 }
 
 .right-request-container img {
-    width: 33%;
-}
-
-.right-contact-accept {
-	display: flex;
-	flex-direction: column;
-}
-
-#no-contact-request { /*N'afficher que si pas de demandes de contact*/
-	display: none;
+    width: 15%;
 }
