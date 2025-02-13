@@ -88,7 +88,7 @@ class Database():
         Return a list containing all the chosen data for a user
         """
 
-        self.cursor.execute("SELECT ? FROM users WHERE username=?", (column, username))
+        self.cursor.execute(f"SELECT {column} FROM users WHERE username=?", (username,))
 
         json_contacts = self.cursor.fetchone()[0]
 
@@ -117,9 +117,4 @@ class Database():
 
 if __name__ == "__main__":
     db = Database()
-    db.reset_data()
-    db.add_user("user1", "password1")
-    print(db.get_data("user1"))
-    db.add_contact("user1", "username23456")
-    print(db.get_data("user1"))
     db.read_data()
