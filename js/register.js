@@ -19,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     })
     .then(response => response.text()) // Convertir la réponse en texte
     .then(data => {
-        data = data
+        document.getElementById("errorMessage").style.display = "block";
     })
     .catch(error => console.error("Erreur :", error));
 });
