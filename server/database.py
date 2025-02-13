@@ -53,7 +53,7 @@ class Database():
         if self.cursor.fetchone() is None:
             return False
 
-        return Truesss
+        return True
 
     def add_user(self, username, password):
         """
