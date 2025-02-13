@@ -3,8 +3,6 @@ from database import Database
 
 app = Flask(__name__)
 
-db_profile = Database()
-
 @app.route('/register', methods=["POST", "OPTIONS"])
 def register():
     if request.method == 'OPTIONS':
@@ -21,6 +19,8 @@ def register():
 
     response = {"code": 0,
         "message": "test"}
+    
+    db_profile = Database()
 
     if not db_profile.user_exist(username):
         try:
@@ -41,6 +41,8 @@ def register():
     response.headers.add("Access-Control-Allow-Methods", "POST")
 
     print("Utilisateur: "+ username, "Mot de passe: " + password)
+
+    db_profile.close()
 
     return response
 
