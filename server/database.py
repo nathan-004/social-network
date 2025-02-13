@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 class Database():
     def __init__(self, file="profiles.db"):
@@ -14,7 +15,8 @@ class Database():
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL,
-                password TEXT NOT NULL
+                password TEXT NOT NULL,
+                contacts TEXT, # Contient les contacts
             )
         """)
 
@@ -65,7 +67,7 @@ class Database():
         Add a new user in the table
         """
 
-        self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?, ?)", (username, password, json.dumps([]))
         self.conn.commit()
 
     def reset_data(self):
@@ -87,6 +89,13 @@ class Database():
             return True
         else:
             return False
+        
+    def get_contacts(self, username):
+        """
+        Return a list containing all the username's contacts of a profile
+        """
+        
+        self.cursor.execute("SELECT contacts FROM users WHERE username=")
 
 if __name__ == "__main__":
     db = Database()
