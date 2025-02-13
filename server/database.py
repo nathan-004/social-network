@@ -48,5 +48,46 @@ class Database():
     def close(self):
         self.conn.close()
 
+    def user_exist(self, username):
+        """
+        Returns True if a username is already took else returns False
+        """
+
+        self.cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+
+        if self.cursor.fetchone() is None:
+            return False
+
+        return True
+
+    def add_user(self, username, password):
+        """
+        Add a new user in the table
+        """
+
+        self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        self.conn.commit()
+
+    def reset_data(self):
+        """
+        Delete everything in the db
+        """
+
+        self.cursor.execute("DELETE FROM users")
+        self.conn.commit()
+
+    def connect_account(self, username, password):
+        """
+        Return True if the username and password is correct else False
+        """
+
+        self.cursor.execute("SELECT password FROM users WHERE username=?", (username,))
+
+        if self.cursor.fetchone()[0] == password:
+            return True
+        else:
+            return False
+
 if __name__ == "__main__":
     db = Database()
+    print(db.connect_account("user2", "password123"))
