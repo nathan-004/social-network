@@ -6,6 +6,7 @@ class Database():
         self.conn = sqlite3.connect(file)
         self.cursor = self.conn.cursor()
         self.file = file
+        self.table_creation()
 
     def table_creation(self):
         """
@@ -16,36 +17,28 @@ class Database():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL,
                 password TEXT NOT NULL,
-                contacts TEXT, # Contient les contacts
-            )
+                contacts TEXT,
+                contacts_request_in TEXT)
         """)
 
         self.conn.commit()
 
-    def insert_data(self):
-        """
-        Insert new data in the table
-        """
-        self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("user1", "password123"))
-        self.conn.commit()
-
-    def read_data(self):
+    def read_data(self, username=None):
         """
         Read data in the table
         """
-        self.cursor.execute("SELECT * FROM users")
+
+        if username is None:
+            self.cursor.execute("SELECT * FROM users")
+        else:
+            self.cursor.execute("SELECT * FROM users WHERE username=?", (username,))
+            return self.cursor.fetchall()
+
         users = self.cursor.fetchall() # Toutes les lignes / fetchone -> une seule ligne
 
         for user in users:
             print(user)
 
-    def update_data(self):
-        self.cursor.execute("UPDATE users SET password = ? WHERE username = ?", ("newpassword123", "user1"))
-        self.conn.commit()
-
-    def delete_data(self):
-        self.cursor.execute("DELETE FROM users WHERE username = ?", ("user1",))
-        self.conn.commit()
 
     def close(self):
         self.conn.close()
@@ -60,14 +53,14 @@ class Database():
         if self.cursor.fetchone() is None:
             return False
 
-        return True
+        return Truesss
 
     def add_user(self, username, password):
         """
         Add a new user in the table
         """
 
-        self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?, ?)", (username, password, json.dumps([]))
+        self.cursor.execute("INSERT INTO users (username, password, contacts, contacts_request_in) VALUES (?, ?, ?, ?)", (username, password, json.dumps([]), json.dumps([])))
         self.conn.commit()
 
     def reset_data(self):
@@ -89,14 +82,44 @@ class Database():
             return True
         else:
             return False
-        
-    def get_contacts(self, username):
+
+    def get_data(self, username, column="contacts"):
         """
-        Return a list containing all the username's contacts of a profile
+        Return a list containing all the chosen data for a user
         """
-        
-        self.cursor.execute("SELECT contacts FROM users WHERE username=")
+
+        self.cursor.execute("SELECT ? FROM users WHERE username=?", (column, username))
+
+        json_contacts = self.cursor.fetchone()[0]
+
+        return json.loads(json_contacts)
+
+    def add_contact(self, username, contact_username):
+        """
+        Add a contact to the username
+        """
+
+        self.cursor.execute("UPDATE users SET contacts=? WHERE username = ?", (json.dumps(self.get_data(username)+[contact_username]), username))
+        self.conn.commit()
+
+    def add_contact_request(self, username, contact_username):
+        """
+        Send a contact request
+        """
+
+        self.cursor.execute("UPDATE users SET contacts_request_in=? WHERE username=?", (json.dumps(self.get_data(contact_username, "contacts_request_in")+[username]), contact_username))
+        self.conn.commit()
+
+    def accept_contact_request(self, username, request_username):
+        """
+        Accept a contact request from request_username on the username profile
+        """
 
 if __name__ == "__main__":
     db = Database()
-    print(db.connect_account("user2", "password123"))
+    db.reset_data()
+    db.add_user("user1", "password1")
+    print(db.get_data("user1"))
+    db.add_contact("user1", "username23456")
+    print(db.get_data("user1"))
+    db.read_data()
