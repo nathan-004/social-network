@@ -244,10 +244,28 @@ footer {
     outline: none;
 }
 
+#usernameNewContact {
+    display: none;
+}
+
+#addContactError {
+    display: none;
+    color: red;
+}
+
+#sendContactRequest {
+    display: none;
+}
+
+#stopContactRequest {
+    display: none;
+}
+
 .right-add-contact img {
     width: 100%;
     height: auto;
     border-radius: 100%;
+    display: none;
 }
 
 
