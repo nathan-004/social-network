@@ -17,10 +17,6 @@
         <!-- Barre de gauche -->
         <div class="left-container">
             <div class="left-contacts-container">
-                <a class="left-contact-link" href="#">
-                    <img src="https://imgs.search.brave.com/GkAIuY4uQSRlbLRd1mseDZNRj6Bx_rQEz2b-y_8gaf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJmLzE1/L2YyLzJmMTVmMmU4/YzY4OGIzMTIwZDNk/MjY0NjdiMDYzMzBj/LmpwZw" alt="Icone">
-                    <p>Utilisateur externe</p>
-                </a>
             </div>
             <div class="left-shortcuts-container"> <!--Profile de l'utilisateur, Paramètres raccourci-->
                 <div class="left-profile-container">
@@ -40,7 +36,7 @@
                 <a href="#">
 				    <div class="mid-top-contact-container">
 					    <img src="https://imgs.search.brave.com/GkAIuY4uQSRlbLRd1mseDZNRj6Bx_rQEz2b-y_8gaf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJmLzE1/L2YyLzJmMTVmMmU4/YzY4OGIzMTIwZDNk/MjY0NjdiMDYzMzBj/LmpwZw" alt="Image de profile de l'utilisateur">
-					    <p class="username">Nom d'utilisateur</p>
+					    <p class="username" id="contactUsername">Nom d'utilisateur</p>
 				    </div>
                 </a>
                 <div class="mid-top-shortcuts-container">
@@ -49,50 +45,11 @@
 			</div>
             <!--Milieu Messages-->
 			<div class="mid-messages-container">
-                <div class="message-container left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt fugiat voluptas voluptates voluptatum commodi eveniet a natus at cum, ducimus obcaecati aperiam soluta harum enim vero velit debitis nihil optio.</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>
-                <div class="message-container left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt fugiat voluptas voluptates voluptatum commodi eveniet a natus at cum, ducimus obcaecati aperiam soluta harum enim vero velit debitis nihil optio.</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>                
-                <div class="message-container left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt fugiat voluptas voluptates voluptatum commodi eveniet a natus at cum, ducimus obcaecati aperiam soluta harum enim vero velit debitis nihil optio.</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>
-                <div class="message-container left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt fugiat voluptas voluptates voluptatum commodi eveniet a natus at cum, ducimus obcaecati aperiam soluta harum enim vero velit debitis nihil optio.</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>
-                <div class="message-container left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt fugiat voluptas voluptates voluptatum commodi eveniet a natus at cum, ducimus obcaecati aperiam soluta harum enim vero velit debitis nihil optio.</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>
-                <div class="message-container left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt fugiat voluptas voluptates voluptatum commodi eveniet a natus at cum, ducimus obcaecati aperiam soluta harum enim vero velit debitis nihil optio.</p>
-                </div>
-                <div class="message-container right">
-                    <p>Ceci est un message de test</p>
-                </div>
             </div>
 
 			<div class="mid-message-sender">
                 <!--Form pour envoyer un message-->
-                <form>
+                <form id="messageSender">
                     <div class="mid-form-container">
                         <textarea id="message" name="message" placeholder="Ecrivez votre message..."></textarea>
                         <button type="submit" id="send-message">Envoyer</button>
