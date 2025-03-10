@@ -1,5 +1,6 @@
 var username = sessionStorage.getItem("username");
 var globalContact = "";
+var globalLastMessage = []; // sender, time, message
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -61,6 +62,7 @@ document.getElementById("messageSender").addEventListener("submit", function(eve
     })
     .catch(error => console.error(error));
 });
+
 
 
 function acceptContact(contactName) {
@@ -249,32 +251,54 @@ function initMessages(contact=true) {
 }
 
 
-function setMessages() {
+async function setMessages() { // Fonctionnement asynchrone
     contact = globalContact;
+    var stopLoop = false;
 
-    fetch("http://127.0.0.1:5000/getmessages", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            "username": username,
-            "contact": contact,
-        })
-    })
-    .then(response => response.json()) // Convertir la réponse en json
-    .then(data => {
-        messages = data.data;
-        document.querySelector(".mid-messages-container").innerHTML = ""; // Efface le contenu de la div
-        if (messages.length != 0) {
-            for (i = 0, len = messages.length; i < len; i++) {
-                addMessage(messages[i]);
-            }
+    for (let i = 0; i < 2; i++) {
+
+        if (stopLoop) {
+            break;
         }
-    })
-    .catch(error => console.error(error));
-}
 
+        try {
+            const response = await fetch("http://127.0.0.1:5000/getmessages", { // Attendre que la fonction ait fini avant de continuer
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "username": username,
+                    "contact": contact,
+                    "mode": i,
+                })
+            });
+
+            const data = await response.json(); // Convertir la réponse en json
+            messages = data.data;
+
+            if (i == 0) { // Optimiser le nombre de message envoyés
+                // message = last message
+                if (JSON.stringify(messages) === JSON.stringify(globalLastMessage)) { // Eviter la comparaison de la position dans la mémoire
+                    stopLoop = true;
+                }
+            }
+            else {
+                if (messages.length != 0) {
+                    document.querySelector(".mid-messages-container").innerHTML = ""; // Efface le contenu de la div
+
+                    for (let j = 0, len = messages.length; j < len; j++) {
+                        addMessage(messages[j]);
+                    }
+
+                    globalLastMessage = messages[messages.length - 1];
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
 
 function main() {
     setContactRequests();
@@ -284,4 +308,4 @@ function main() {
     }
 }
 
-window.setInterval(main, 500);
+window.setInterval(main, 350);
