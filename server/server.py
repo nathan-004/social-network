@@ -244,20 +244,29 @@ def gemessages():
     data = request.get_json()
     username = data.get("username")
     contact = data.get("contact")
+    mode = data.get("mode") # 0 -> le dernier message 1 -> L'ensemble des messages
 
-    response = {"code": 0,
+    response = {"code": 0, 
         "message": "test",
         "data": []
         }
     
     db_messages = Messages()
 
-    try:
-        response["data"] = db_messages.get_messages([username, contact])
-        response["message"] = "OK"
-    except:
-        response["code"] = 1
-        response["message"] = "Erreur innatendue"
+    if mode == 0:
+        try:
+            response["data"] = db_messages.get_messages([username, contact])[-1]
+            response["message"] = "OK"
+        except:
+            response["code"] = 1
+            response["message"] = "Erreur innatendue"
+    elif mode == 1:
+        try:
+            response["data"] = db_messages.get_messages([username, contact])
+            response["message"] = "OK"
+        except:
+            response["code"] = 1
+            response["message"] = "Erreur innatendue"
 
     print("Utilisateur: "+ username, "Reponse: " + response["message"], "Data:", response["data"])
 
