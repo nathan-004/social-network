@@ -1,24 +1,39 @@
 from flask import Flask, request, jsonify
+from functools import wraps
+
 from database import Database, Messages
 
 app = Flask(__name__)
 
-@app.route('/register', methods=["POST", "OPTIONS"])
-def register():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
+
+def cors_handler(func):
+    @wraps(func) # Métadonnées de la fonction
+    def wrapper(*args, **kwargs): # Gestion des paramètres
+        if request.method == 'OPTIONS':
+            response = jsonify({"message": "CORS OK"})
+            response.headers.add("Access-Control-Allow-Origin", "*")
+            response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+            response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
+            return response, 200
+
+        # Exécuter la fonction originale
+        response = func(*args, **kwargs)
+
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
+        response.headers.add("Access-Control-Allow-Methods", "POST")
 
+        return response
+    return wrapper
+
+@app.route('/register', methods=["POST", "OPTIONS"])
+@cors_handler
+def register():
     data = request.get_json()
     username = data.get("username")
     password = data.get("password")
 
-    response = {"code": 0,
-        "message": "test"}
+    response = {"code": 0, "message": "test"}
     
     db_profile = Database()
 
@@ -35,32 +50,18 @@ def register():
 
     print("Utilisateur: "+ username, "Mot de passe: " + password, "Reponse: " + response["message"])
 
-    response = jsonify(response)
-
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     db_profile.close()
 
-    return response
+    return jsonify(response)
 
 @app.route('/login', methods=["POST", "OPTIONS"])
+@cors_handler
 def login():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
     data = request.get_json()
     username = data.get("username")
     password = data.get("password")
 
-    response = {"code": 0,
-        "message": "test"}
+    response = {"code": 0, "message": "test"}
     
     db_profile = Database()
 
@@ -76,26 +77,13 @@ def login():
 
     print("Utilisateur: "+ username, "Mot de passe: " + password, "Reponse: " + response["message"])
 
-    response = jsonify(response)
-
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     db_profile.close()
 
-    return response
+    return jsonify(response)
 
 @app.route('/addcontactrequest', methods=["POST", "OPTIONS"])
+@cors_handler
 def getuser():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
     data = request.get_json()
     username = data.get("username")
     contact_username = data.get("contact_username")
@@ -120,22 +108,11 @@ def getuser():
 
     response = jsonify(response)
 
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     return response
 
 @app.route('/getcontactrequests', methods=["POST", "OPTIONS"])
+@cors_handler
 def getcontactrequests():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
     data = request.get_json()
     username = data.get("username")
 
@@ -152,22 +129,11 @@ def getcontactrequests():
 
     response = jsonify(response)
 
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     return response
 
 @app.route('/acceptcontactrequest', methods=["POST", "OPTIONS"])
+@cors_handler
 def acceptcontactrequests():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
     data = request.get_json()
     username = data.get("username")
     contact_request = data.get("request_username")
@@ -188,22 +154,11 @@ def acceptcontactrequests():
 
     response = jsonify(response)
 
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     return response
 
 @app.route('/getcontacts', methods=["POST", "OPTIONS"])
+@cors_handler
 def getcontacts():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
     data = request.get_json()
     username = data.get("username")
 
@@ -225,22 +180,11 @@ def getcontacts():
 
     response = jsonify(response)
 
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     return response
 
 @app.route('/getmessages', methods=["POST", "OPTIONS"])
-def gemessages():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
+@cors_handler
+def getmessages():
     data = request.get_json()
     username = data.get("username")
     contact = data.get("contact")
@@ -272,22 +216,11 @@ def gemessages():
 
     response = jsonify(response)
 
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
-
     return response
 
 @app.route('/newmessage', methods=["POST", "OPTIONS"])
+@cors_handler
 def newmessage():
-    if request.method == 'OPTIONS':
-        # Répondre aux requêtes préflight (CORS)
-        response = jsonify({"message": "CORS OK"})
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        return response, 200
-
     data = request.get_json()
     sender = data.get("sender")
     contact = data.get("contact")
@@ -314,10 +247,6 @@ def newmessage():
     print("Utilisateur: "+ sender, "Reponse: " + response["message"])
 
     response = jsonify(response)
-
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Autorise toutes les origines
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
 
     return response
 
