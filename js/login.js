@@ -1,3 +1,5 @@
+let scrollCount = 0;
+
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Empêche le formulaire de se soumettre normalement
 	
@@ -46,10 +48,12 @@ function calculateText(texte) {
 }
 
 document.addEventListener("scroll", function(event) {
-	let idx = 0;
-	document.querySelectorAll('.texte').forEach(element => {
-		element.textContent = calculateText(element.innerHTML);
-		console.log(element.innerHTML);
-	});
+    scrollCount += 1;
+    if (scrollCount % 3 == 0) {
+	    let idx = 0;
+	    document.querySelectorAll('.texte').forEach(element => {
+		    element.textContent = calculateText(element.innerHTML);
+		    console.log(element.innerHTML);
+	    });
+    }
 });
-
