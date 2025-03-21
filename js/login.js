@@ -33,3 +33,23 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 
 });
 
+function calculateText(texte) {
+	let newText = "";
+	
+	for (let i = 1; i < texte.length; i++) {
+		newText += texte[i];
+	}
+	
+	newText += texte[0];
+
+	return newText;
+}
+
+document.addEventListener("scroll", function(event) {
+	let idx = 0;
+	document.querySelectorAll('.texte').forEach(element => {
+		element.textContent = calculateText(element.innerHTML);
+		console.log(element.innerHTML);
+	});
+});
+
