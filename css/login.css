@@ -1,3 +1,5 @@
+
+
 body {
 	margin: 0;        
 	padding: 0;
@@ -17,6 +19,7 @@ body {
 }
 
 .container {
+	z-index: 1;
 	width: 35%;
 	max-width: 400px;
 	margin: 50px auto;
@@ -72,7 +75,13 @@ input[type="submit"]:hover {
 	text-decoration: none;
 }
 
+
+/*------------------------------Fond d'ecran---------------------------------*/
 .text-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: -4;
 	height: auto;
 	overflow-x: hidden;
 	width: 200%;
@@ -80,7 +89,75 @@ input[type="submit"]:hover {
 }
 
 .text-container p {
+	z-index: 5;
 	width: 100%;
 	height: auto;
 	margin: 0;
 }
+
+
+/*------------------------------Jeu de test--------------------------*/
+.info-container {
+	margin-bottom: 150px;
+	background-color: black;
+}
+
+.banner-title {
+	color: black;
+	background: linear-gradient(90deg, rgba(211,255,0,1) 0%, rgba(41,125,50,1) 67%, rgba(20,112,131,1) 100%);
+}
+
+.banner-title h2 {
+	font-size: 250px;
+	margin: 0;
+}
+
+.description-container {
+	color: white;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.description-container * {
+	padding: 5px;
+}
+
+.username {
+	border-radius: 3%;
+	background: linear-gradient(90deg, rgba(211,255,0,1) 0%, rgba(41,125,50,1) 67%, rgba(20,112,131,1) 100%);
+	color: #00000000;
+}
+
+.username:hover {
+	color: #000;
+}
+
+.password {
+	border-radius: 3%;
+	background: linear-gradient(90deg, rgb(158, 31, 31) 0%, rgb(177, 127, 33) 67%, rgb(233, 236, 16) 100%);
+	color: #00000000;
+}
+
+.password:hover {
+	color: #000;
+}
+
+/*--------------------------------------SYNK-------------------------------------------*/
+.blue {
+	background: linear-gradient(90deg, rgba(145,0,255,1) 0%, rgba(41,26,71,1) 50%, rgba(62,154,173,1) 100%);
+}
+
+/*------------------------------- Credits -------------------------------------------*/
+.red {
+	background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,119,0,1) 50%, rgba(255,223,0,1) 100%);
+}
+
+.hidder {
+	margin-bottom: 100%;
+}
+
+/*--------------------------------------------- Footer ----------------------------------------------*/
+footer {
+	color: #3b3b3b;
+}
+
