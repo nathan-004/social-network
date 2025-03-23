@@ -1,0 +1,21 @@
+@media only screen and (max-width: 1500px) {
+    .right-container {
+        width: 35%;
+        display: none;
+    }
+
+    #openRightContainer {
+        display: initial;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .left-container {
+        width: 35%;
+        display: none;
+    }
+
+    #openLeftContainer {
+        display: initial;
+    }
+}

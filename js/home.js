@@ -1,6 +1,7 @@
 var username = sessionStorage.getItem("username");
 var globalContact = "";
 var globalLastMessage = []; // sender, time, message
+var globalContacts = []
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -63,7 +64,25 @@ document.getElementById("messageSender").addEventListener("submit", function(eve
     .catch(error => console.error(error));
 });
 
+document.getElementById("closeContactButton").addEventListener("click", function (event) {
+    document.querySelector(".left-container").style.display = "none";
+    document.getElementById("openLeftContainer").style.display = "initial";
+});
 
+document.getElementById("openLeftContainer").addEventListener("click", function (event) {
+    document.querySelector(".left-container").style.display = "flex";
+    document.getElementById("openLeftContainer").style.display = "none";
+});
+
+document.getElementById("closeContactButtonRight").addEventListener("click", function (event) {
+    document.querySelector(".right-container").style.display = "none";
+    document.getElementById("openRightContainer").style.display = "initial";
+});
+
+document.getElementById("openRightContainer").addEventListener("click", function (event) {
+    document.querySelector(".right-container").style.display = "flex";
+    document.getElementById("openRightContainer").style.display = "none";
+});
 
 function acceptContact(contactName) {
     fetch("http://127.0.0.1:5000/acceptcontactrequest", {
@@ -209,28 +228,36 @@ function setContactRequests() {
     .catch(error => console.error(error));
 }
 
-function setContactsLeft() {
+async function setContactsLeft() {
     // Actualise les contacts dans la barre de gauche
-    fetch("http://127.0.0.1:5000/getcontacts", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            "username": username,
-        })
-    })
-    .then(response => response.json()) // Convertir la réponse en json
-    .then(data => {
-        contacts = data.data
-        document.querySelector(".left-contacts-container").innerHTML = ""; // Efface le contenu de la div
-        if (contacts.length != 0) {
-            for (i = 0, len = contacts.length; i < len; i++) {
-                addContactContainer(contacts[i]);
+    try {
+        const response = await fetch("http://127.0.0.1:5000/getcontacts", { // Attendre que la fonction ait fini avant de continuer
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "username": username,
+            })
+        });
+
+        const data = await response.json();
+        contacts = data.data;
+
+        if (JSON.stringify(contacts) != JSON.stringify(globalContacts)) { // Eviter la comparaison de la position dans la mémoire
+            document.querySelector(".left-contacts-container").innerHTML = ""; // Efface le contenu de la div
+            if (contacts.length != 0) {
+                for (i = 0, len = contacts.length; i < len; i++) {
+                    addContactContainer(contacts[i]);
+                }
             }
         }
-    })
-    .catch(error => console.error(error));
+
+        globalContacts = contacts;
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 
 function initMessages(contact=true) {
@@ -282,11 +309,11 @@ async function setMessages() { // Fonctionnement asynchrone
                 if (JSON.stringify(messages) === JSON.stringify(globalLastMessage)) { // Eviter la comparaison de la position dans la mémoire
                     stopLoop = true;
                 }
+                
             }
             else {
+                document.querySelector(".mid-messages-container").innerHTML = ""; // Efface le contenu de la div
                 if (messages.length != 0) {
-                    document.querySelector(".mid-messages-container").innerHTML = ""; // Efface le contenu de la div
-
                     for (let j = 0, len = messages.length; j < len; j++) {
                         addMessage(messages[j]);
                     }

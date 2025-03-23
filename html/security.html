@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNK Security</title>
+</head>
+<body>
+    <h1>SYNK Security</h1>
+
+    <p>Cette page montre la facilité avec laquelle la connection avec mot de passe peut être contourné dans SYNK</p>
+
+    <p>D'abord, il faudra se connecter à un compte SYNK (pas nécessairement)</p>
+
+    <img src="../images/security/image1.png" width="750">
+
+    <p>Il faut ensuite aller dans l'inspecteur (F12), puis dans Console.</p>
+    <p>Après il faut taper la commande suivante : <code>sessionStorage.setItem("username", "user2")</code> par exemple</p>
+
+    <img src="../images/security/image2.png" width="750">
+
+    <p>Si vous êtes sur la page login, il faudra taper la même commande puis <code>sessionStorage.setItem("connected", true);</code></p>
+
+</body>
+</html>

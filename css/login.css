@@ -156,8 +156,30 @@ input[type="submit"]:hover {
 	margin-bottom: 100%;
 }
 
+/**/
+
+.secret-link {
+	color: white;
+	text-decoration: none;
+}
+
+.black {
+	background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(158,158,158,1) 50%, rgba(57,57,57,1) 100%);
+}
+
 /*--------------------------------------------- Footer ----------------------------------------------*/
 footer {
 	color: #3b3b3b;
+}
+
+.liens {
+	display: flex;
+	
+}
+
+.liens a img {
+	background-color: #000;
+	border-radius: 100%;
+	width: 150px;
 }
 

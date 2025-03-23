@@ -4,7 +4,11 @@ a {
 	color: black;
 }
 
-/*----------------------------Positionnements : ChatGPT avec modifications---------------------------------*/
+button:hover {
+    cursor: pointer;
+}
+
+/*----------------------------Positionnements---------------------------------*/
 
 * {
     margin: 0;
@@ -72,8 +76,33 @@ footer {
     text-align: center;
 }
 
+/*----------------------------Gauche Bouton----------------------------*/
+.open-left-button-container {
+    position: absolute;
+}
+
+#openLeftContainer {
+    display: none;
+}
+
+.close-button-container {
+    gap: 5px;
+    position:relative;
+    width: 100%;
+}
+
+.close-button-container button {
+    margin-right: 5px;
+    float: right;
+    background-color: #33333300;
+    border: none;
+    font-size: 25px;
+}
+
+
 /*----------------------------Gauche Contacts positionnements----------------------------*/
 .left-contacts-container {
+    width: 100%;
     flex-grow: 10;
     text-align: center;
     overflow-y: auto;
@@ -83,6 +112,7 @@ footer {
 .left-contact-link {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background: #44444400;
     color: white;
@@ -92,8 +122,12 @@ footer {
 
 .left-contact-link img {
     border-radius: 100%;
-    width: 15%;
+    width: 35px;
     height: auto;
+}
+
+.left-contact-link:hover {
+    background: #ffffff36;
 }
 
 /*----------------------------Gauche Raccourcis positionnements----------------------------*/
@@ -226,6 +260,16 @@ footer {
 }
 
 /*----------------------------Droite Paramètres----------------------------*/
+/*Bouton droite--------------------------------------------*/
+.open-right-button-container {
+    position: absolute;
+    right: 0;
+}
+
+#openRightContainer {
+    display: none;
+}
+
 /*Ajouter un nouveau contact via son identifiant----------------------------*/
 .right-add-contact {
     flex-grow: 1;
