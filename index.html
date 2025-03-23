@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synk</title>
     <link rel="stylesheet" type="text/css" href="./css/home.css">
+    <link rel="stylesheet" type="text/css" href="./css/home_mobile.css">
 </head>
 <body>
 
@@ -14,8 +15,15 @@
     </header>
 
     <main>
+        
         <!-- Barre de gauche -->
+        <div class="open-left-button-container">
+            <button id="openLeftContainer">Contacts</button>
+        </div>
         <div class="left-container">
+            <div class="close-button-container">
+                <button id="closeContactButton">X</button>
+            </div>
             <div class="left-contacts-container">
             </div>
             <div class="left-shortcuts-container"> <!--Profile de l'utilisateur, Paramètres raccourci-->
@@ -59,7 +67,13 @@
         </div>
 
         <!-- Barre de droite -->
+        <div class="open-right-button-container">
+            <button id="openRightContainer">Demandes de contact</button>
+        </div>
         <div class="right-container">
+            <div class="close-button-container rightButton">
+                <button id="closeContactButtonRight">X</button>
+            </div>
             <!--Ajouter un contact-->
             <div class="right-add-contact">
                 <form id="rightVerifyContact">
@@ -87,7 +101,8 @@
 
     <!-- Barre du bas -->
     <footer>
-        <h2>Navigation Bas</h2>
+        <h2>Attention !</h2>
+        <p>Ne partagez aucune donnée confidentielle.</p>
     </footer>
 
 </body>
