@@ -1,7 +1,8 @@
 var username = sessionStorage.getItem("username");
 var globalContact = "";
 var globalLastMessage = []; // sender, time, message
-var globalContacts = []
+var globalContacts = [];
+var mouseCheck = false;
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -82,6 +83,30 @@ document.getElementById("closeContactButtonRight").addEventListener("click", fun
 document.getElementById("openRightContainer").addEventListener("click", function (event) {
     document.querySelector(".right-container").style.display = "flex";
     document.getElementById("openRightContainer").style.display = "none";
+});
+
+document.getElementById("colorButton").addEventListener("click", function (event) {
+	document.getElementById("colorSettings").style.display = "initial";
+});
+
+document.getElementById("topBanner").addEventListener("mousedown", function (event) {
+	mouseCheck = true;
+	e.preventDefault();
+});
+
+document.addEventListener("mouseup", function (event) {
+	mouseCheck = false;
+});
+
+document.getElementById("colorSettings").addEventListener("mousemove", function(event) {
+	if (mouseCheck) {
+		document.getElementById("colorSettingsContainer").style.left = (event.clientX).toString() + "px";
+		document.getElementById("colorSettingsContainer").style.top = event.clientY.toString() + "px";
+	}
+});
+
+document.getElementById("colorSettings").addEventListener("click", function (event) {
+	document.getElementById("colorSettings").style.display = "none";
 });
 
 function acceptContact(contactName) {
