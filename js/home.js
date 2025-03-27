@@ -3,6 +3,7 @@ var globalContact = "";
 var globalLastMessage = []; // sender, time, message
 var globalContacts = [];
 var mouseCheck = false;
+var clickCheck = false;
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -91,7 +92,7 @@ document.getElementById("colorButton").addEventListener("click", function (event
 
 document.getElementById("topBanner").addEventListener("mousedown", function (event) {
 	mouseCheck = true;
-	e.preventDefault();
+	event.preventDefault();
 });
 
 document.addEventListener("mouseup", function (event) {
@@ -105,8 +106,19 @@ document.getElementById("colorSettings").addEventListener("mousemove", function(
 	}
 });
 
+document.getElementById("colorSettingsContainer").addEventListener("mouseover", function (event) {
+	clickCheck = false;
+});
+
+document.getElementById("colorSettingsContainer").addEventListener("mouseout", function (event) {
+	clickCheck = true;
+});
+
 document.getElementById("colorSettings").addEventListener("click", function (event) {
-	document.getElementById("colorSettings").style.display = "none";
+	console.log("click", clickCheck);
+	if (clickCheck) {
+		document.getElementById("colorSettings").style.display = "none";
+	}
 });
 
 function acceptContact(contactName) {
