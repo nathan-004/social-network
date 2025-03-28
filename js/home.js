@@ -1,9 +1,21 @@
 var username = sessionStorage.getItem("username");
+
 var globalContact = "";
 var globalLastMessage = []; // sender, time, message
 var globalContacts = [];
+
 var mouseCheck = false;
 var clickCheck = false;
+
+var themesElements = {
+    "sidePanels": ["left-container", "right-container"],
+    "midMessage": ["mid-messages-container"],
+    "messageLeft": ["left"],
+    "messageRight": ["right"],
+    "mid": ["mid-container"]
+}
+
+var themes = ["default", "dark", "contrast", "blue"];
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -362,6 +374,25 @@ async function setMessages() { // Fonctionnement asynchrone
             console.error(error);
         }
     }
+}
+
+function changeTheme(themeName) {
+    if (!(themes.includes(themeName))) {
+        return 1;
+    }
+    
+    var start = themeName + "-theme-";
+
+    for (let key in themesElements) {
+        console.log(key);
+        for (let i = 0; i < themesElements[key].length; i++) {
+            console.log(themesElements[key][i], "test1")
+            document.querySelectorAll("." + themesElements[key][i]).forEach(function(element) {
+                console.log(start+key);
+                element.classList.add(start+key);
+            });
+        }
+    }   
 }
 
 function main() {
