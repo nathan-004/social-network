@@ -376,7 +376,7 @@ async function setMessages() { // Fonctionnement asynchrone
     }
 }
 
-function changeTheme(themeName) {
+function changeTheme(themeName, start_=false) {
     if (!(themes.includes(themeName))) {
         return 1;
     }
@@ -384,11 +384,14 @@ function changeTheme(themeName) {
     var start = themeName + "-theme-";
 
     for (let key in themesElements) {
-        console.log(key);
         for (let i = 0; i < themesElements[key].length; i++) {
-            console.log(themesElements[key][i], "test1")
             document.querySelectorAll("." + themesElements[key][i]).forEach(function(element) {
-                console.log(start+key);
+                if (!start_) {
+                    for (let j = 0; j < themes.length; j++) {
+                        console.log(themes[j] + "-theme-" + key);
+                        element.classList.remove(themes[j] + "-theme-" + key);
+                    }
+                }
                 element.classList.add(start+key);
             });
         }
@@ -403,4 +406,5 @@ function main() {
     }
 }
 
+changeTheme("default", true);
 window.setInterval(main, 350);

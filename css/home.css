@@ -142,7 +142,6 @@ main {
 
 /* Barre de gauche */
 .left-container {
-    background: #444444;
     color: white;
     width: 15%;
     height: 100%;
@@ -163,7 +162,6 @@ main {
 
 /* Barre de droite */
 .right-container {
-    background: #555;
     color: white;
     width: 10%;
     padding: 10px;
@@ -245,6 +243,7 @@ footer {
 .left-profile-container {
     display: flex;
     align-items: center;
+    width: 100%;
     gap : 20px;
 }
 
