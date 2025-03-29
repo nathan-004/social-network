@@ -1,5 +1,6 @@
 var username = sessionStorage.getItem("username");
 
+var globalTheme = "default";
 var globalContact = "";
 var globalLastMessage = []; // sender, time, message
 var globalContacts = [];
@@ -10,8 +11,8 @@ var clickCheck = false;
 var themesElements = {
     "sidePanels": ["left-container", "right-container"],
     "midMessage": ["mid-messages-container"],
-    "messageLeft": ["left"],
-    "messageRight": ["right"],
+    "messageLeft": ["left-p"],
+    "messageRight": ["right-p"],
     "mid": ["mid-container"]
 }
 
@@ -236,15 +237,17 @@ function addMessage(message) {
     let messageContainer = document.createElement("div");
     messageContainer.classList.add("message-container")
 
+    let p = document.createElement("p");
+    p.textContent = message[2];
+    
     if (message[0] == username) {
         messageContainer.classList.add("right");
+        p.classList.add("right-p");
     }
     else {
         messageContainer.classList.add("left");
+        p.classList.add("left-p");
     }
-
-    let p = document.createElement("p");
-    p.textContent = message[2];
 
     messageContainer.appendChild(p);
 
@@ -369,6 +372,7 @@ async function setMessages() { // Fonctionnement asynchrone
 
                     globalLastMessage = messages[messages.length - 1];
                 }
+                changeTheme(globalTheme);
             }
         } catch (error) {
             console.error(error);
@@ -380,7 +384,8 @@ function changeTheme(themeName, start_=false) {
     if (!(themes.includes(themeName))) {
         return 1;
     }
-    
+
+    globalTheme = themeName;
     var start = themeName + "-theme-";
 
     for (let key in themesElements) {

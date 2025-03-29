@@ -100,15 +100,64 @@ button:hover {
 }
 
 .dark-theme-messageLeft {
-    background-color: #2b2b2b;
+    background-color: #c9c9c9;
 }
 
 .dark-theme-messageRight {
-    background-color: #2b2b2b;
+    background-color: #9b9b9b;
 }
 
 .dark-theme-mid {
-    background-color: #444444;
+    background-color: #5f5f5f;
+}
+
+/*Thème high-contrast ----------------------------*/
+.contrast-theme-sidePanels {
+    background-color: #000000;
+    border: 3px solid white;
+}
+
+.contrast-theme-midMessage {
+    background-color: #000000;
+    border: 4px solid white;
+}
+
+.contrast-theme-messageLeft {
+    background-color: #000000;
+    color: white;
+    border: 3px solid rgb(19, 239, 255);
+}
+
+.contrast-theme-messageRight {
+    background-color: #000000;
+    color: white;
+    border: 3px solid rgb(247, 222, 0);
+}
+
+.contrast-theme-mid {
+    border: 3px white;
+    background-color: black;
+}
+
+/*Thème bleu ----------------------------*/
+.blue-theme-sidePanels {
+    background: rgb(32, 32, 92);
+}
+
+.blue-theme-midMessage {
+    background: rgb(19, 19, 124);
+}
+
+.blue-theme-mid {
+    background: rgba(44, 44, 255, 0.37);
+}
+
+.blue-theme-messageLeft {
+    background-color: #1972f8;
+}
+
+.blue-theme-messageRight {
+    background-color: #5856f1;
 }
 
 /*----------------------------Positionnements---------------------------------*/
@@ -307,7 +356,6 @@ footer {
 /*----------------------------Milieu Messages----------------------------*/
 .mid-messages-container {
     padding: 1%;
-    background-color: #3d3d3d;
     overflow-y: auto;
     height: 80%;
     max-height: 80%;  
@@ -337,7 +385,6 @@ footer {
 }
 
 .left * {
-    background-color: #917a7a;
     width: fit-content;
 }
 
@@ -347,7 +394,6 @@ footer {
 }
 
 .right * {
-    background-color: #88979b;
     width: fit-content;
 }
 
