@@ -161,6 +161,27 @@ button:hover {
     background-color: #5856f1;
 }
 
+/*Thème personnalisable ----------------------------*/
+.personnalisable-theme-sidePanels {
+    background: #444444;
+}
+
+.personnalisable-theme-midMessage {
+    background-color: #3d3d3d;
+}
+
+.personnalisable-theme-messageLeft {
+    background-color: #917a7a;
+}
+
+.personnalisable-theme-messageRight {
+    background-color: #88979b;
+}
+
+.personnalisable-theme-mid {
+    background-color: white;
+}
+
 /*---------------------------- Thèmes Personnalisés ----------------------------*/
 /*Sélection des éléments ----------------------------*/
 

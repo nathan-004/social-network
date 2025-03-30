@@ -15,7 +15,7 @@ var themesElements = {
     "messageRight": ["right-p"],
     "mid": ["mid-container"]
 }
-var themes = ["default", "dark", "contrast", "blue"];
+var themes = ["default", "dark", "contrast", "blue", "personnalisable"];
 
 var pthemesElements = {
     "element-selection-container": [], // Contient les éléments choisis par l'utilisateur
@@ -144,6 +144,7 @@ for (let key in pthemesElements) {
         var children = element.children;
         for (let i = 0; i < children.length; i++) {
             children[i].addEventListener("click", function (e) {
+                changeTheme("personnalisable")
                 if (!pthemesElements[key].includes(children[i].value)) {
                     if (key != pthemes[pthemes.length-1]) {
                         document.querySelector("." + pthemes[pthemes.indexOf(key)+1]).style.display = "initial";
@@ -184,14 +185,7 @@ for (let key in pthemesElements) {
 }
 
 document.getElementById("colorElement").addEventListener("input", function (e) {
-    for (let i = 0; i < pthemesElements["element-selection-container"].length; i++) { // Toutes les valeurs reçues
-        console.log(pthemesElements["element-selection-container"][i]);
-        for (let j = 0; j < themesElements[pthemesElements["element-selection-container"][i]].length; j++) { // Toutes les classes voulues
-            for (let k = 0; k < pthemesElements["element-color-selection-container"].length; k++) { // Tous les éléments à modifier
-                changeColor(themesElements[pthemesElements["element-selection-container"][i]][j], pthemesElements["element-color-selection-container"][k], this.value);
-            }
-        }
-    }
+    changeColor();
 });
 
 function acceptContact(contactName) {
@@ -433,6 +427,7 @@ async function setMessages() { // Fonctionnement asynchrone
                     globalLastMessage = messages[messages.length - 1];
                 }
                 changeTheme(globalTheme);
+                console.log(globalTheme);
             }
         } catch (error) {
             console.error(error);
@@ -446,6 +441,11 @@ function changeTheme(themeName, start_=false) {
     }
 
     globalTheme = themeName;
+
+    if (themeName == "personnalisable") {
+        changeColor();
+    }
+
     var start = themeName + "-theme-";
 
     for (let key in themesElements) {
@@ -463,11 +463,23 @@ function changeTheme(themeName, start_=false) {
     }   
 }
 
-function changeColor(className, element_, color) {
-    console.log(className, element_, color);
-    document.querySelectorAll("." + className).forEach(function (element) {
-        element.style.setProperty(element_, color);
-    });
+function changeColor() {
+    for (let i = 0; i < pthemesElements["element-selection-container"].length; i++) { // Toutes les valeurs reçues
+        for (let j = 0; j < themesElements[pthemesElements["element-selection-container"][i]].length; j++) { // Toutes les classes voulues
+            for (let k = 0; k < pthemesElements["element-color-selection-container"].length; k++) { // Tous les éléments à modifier
+                var element_ = pthemesElements["element-color-selection-container"][k];
+                var className = themesElements[pthemesElements["element-selection-container"][i]][j];
+                var color = document.getElementById("colorElement").value;
+                if (element_ == "border") {
+                    color = "2px solid " + color;
+                }
+
+                document.querySelectorAll("." + className).forEach(function (element) {
+                    element.style.setProperty(element_, color);
+                });
+            }
+        }
+    }
 }
 
 function main() {
