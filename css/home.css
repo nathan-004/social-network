@@ -37,6 +37,7 @@ button:hover {
     display: flex;
     gap: 10px;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .color-selection-button {
@@ -158,6 +159,19 @@ button:hover {
 
 .blue-theme-messageRight {
     background-color: #5856f1;
+}
+
+/*---------------------------- Thèmes Personnalisés ----------------------------*/
+/*Sélection des éléments ----------------------------*/
+
+/*Sélection des choses à modifier ----------------------------*/
+.element-color-selection-container {
+    display: none;
+}
+
+/*Sélection de la couleur ----------------------------*/
+.color-selection-container {
+    display: none;
 }
 
 /*----------------------------Positionnements---------------------------------*/

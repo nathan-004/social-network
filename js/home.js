@@ -15,8 +15,13 @@ var themesElements = {
     "messageRight": ["right-p"],
     "mid": ["mid-container"]
 }
-
 var themes = ["default", "dark", "contrast", "blue"];
+
+var pthemesElements = {
+    "element-selection-container": [], // Contient les éléments choisis par l'utilisateur
+    "element-color-selection-container": [],
+}
+var pthemes = ["element-selection-container", "element-color-selection-container"]
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -132,6 +137,61 @@ document.getElementById("colorSettings").addEventListener("click", function (eve
 	if (clickCheck) {
 		document.getElementById("colorSettings").style.display = "none";
 	}
+});
+
+for (let key in pthemesElements) {
+    document.querySelectorAll("." + key).forEach(function(element) {
+        var children = element.children;
+        for (let i = 0; i < children.length; i++) {
+            children[i].addEventListener("click", function (e) {
+                if (!pthemesElements[key].includes(children[i].value)) {
+                    if (key != pthemes[pthemes.length-1]) {
+                        document.querySelector("." + pthemes[pthemes.indexOf(key)+1]).style.display = "initial";
+                    }
+                    else {
+                        document.querySelector(".color-selection-container").style.display = "initial";
+                    }
+                    children[i].style.border = "2px solid yellow";
+                    children[i].style.background = "rgb(255, 255, 153)";
+                    pthemesElements[key].push(children[i].value);
+                }
+                else {
+                    children[i].style.border = "2px outset buttonborder";
+                    children[i].style.background = "buttonface";
+                    const index = pthemesElements[key].indexOf(children[i].value);
+                    if (index > -1) { 
+                        pthemesElements[key].splice(index, 1);
+                    }
+                    if (pthemesElements[key].length == 0) {
+                        document.querySelector(".color-selection-container").style.display = "none";
+
+                        if (key == pthemes[0]) {
+                            for (let j = 1; j < pthemes.length; j++) {
+                                pthemesElements[pthemes[j]] = [];
+                                var children_ = document.querySelector("." + pthemes[j]).children;
+                                for (let k = 0; k < children_.length; k++) {
+                                    children_[k].style.border = "2px outset buttonborder";
+                                    children_[k].style.background = "buttonface";
+                                }
+                                document.querySelector("." + pthemes[j]).style.display = "none";
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+}
+
+document.getElementById("colorElement").addEventListener("input", function (e) {
+    for (let i = 0; i < pthemesElements["element-selection-container"].length; i++) { // Toutes les valeurs reçues
+        console.log(pthemesElements["element-selection-container"][i]);
+        for (let j = 0; j < themesElements[pthemesElements["element-selection-container"][i]].length; j++) { // Toutes les classes voulues
+            for (let k = 0; k < pthemesElements["element-color-selection-container"].length; k++) { // Tous les éléments à modifier
+                changeColor(themesElements[pthemesElements["element-selection-container"][i]][j], pthemesElements["element-color-selection-container"][k], this.value);
+            }
+        }
+    }
 });
 
 function acceptContact(contactName) {
@@ -401,6 +461,13 @@ function changeTheme(themeName, start_=false) {
             });
         }
     }   
+}
+
+function changeColor(className, element_, color) {
+    console.log(className, element_, color);
+    document.querySelectorAll("." + className).forEach(function (element) {
+        element.style.setProperty(element_, color);
+    });
 }
 
 function main() {
