@@ -9,7 +9,7 @@ var mouseCheck = false;
 var clickCheck = false;
 
 var themesElements = {
-    "sidePanels": ["left-container", "right-container"],
+    "sidePanels": ["left-container", "right-container", "html-footer", "html-header"],
     "midMessage": ["mid-messages-container"],
     "messageLeft": ["left-p"],
     "messageRight": ["right-p"],
@@ -80,6 +80,7 @@ document.getElementById("messageSender").addEventListener("submit", function(eve
         else {
             console.log(data.message);
         }
+		document.getElementById("message").value = "";
     })
     .catch(error => console.error(error));
 });
@@ -188,7 +189,6 @@ document.getElementById("colorElement").addEventListener("input", function (e) {
 });
 
 function acceptContact(contactName, mode=1) {
-	console.log(mode);
     fetch("http://127.0.0.1:5000/acceptcontactrequest", {
         method: "POST",
         headers: {
@@ -238,7 +238,6 @@ function addRequestContainer(profileName, profileImage="https://imgs.search.brav
     let refuseButton = document.createElement("button");
     refuseButton.textContent = "Refuser";
     refuseButton.addEventListener("click", () => {
-		console.log(0);
         acceptContact(profileName, 0);
     });
 

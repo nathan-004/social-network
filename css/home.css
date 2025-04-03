@@ -138,6 +138,7 @@ button:hover {
 .contrast-theme-mid {
     border: 3px white;
     background-color: black;
+	color:white;
 }
 
 /*Thème bleu ----------------------------*/
@@ -212,7 +213,6 @@ body {
 
 /* Barre du haut */
 header {
-    background: #333;
     color: white;
     padding: 10px;
     text-align: center;
@@ -255,7 +255,6 @@ main {
 
 /* Barre du bas */
 footer {
-    background: #333;
     color: white;
     padding: 10px;
     text-align: center;
@@ -321,7 +320,7 @@ footer {
 /*----------------------------Gauche Raccourcis positionnements----------------------------*/
 .left-shortcuts-container {
     flex-grow: 1;
-    background-color: #7979797e;
+    background-color: #7979792e;
     margin: 0% 2%;
     border-radius: 3.5%;
 	display: flex;
@@ -366,10 +365,16 @@ footer {
 /*----------------------------Milieu Top----------------------------*/
 .mid-top-container {
     display: none;
+	color: inherit;
+}
+
+.mid-top-container a {
+	color: inherit;
 }
 
 /*----------------------------Milieu Contact Profil----------------------------*/
 .mid-top-contact-container {
+	color: inherit;
     flex-grow: 1;
 	display: flex;
 	align-items: center;
@@ -383,6 +388,7 @@ footer {
 }
 
 .mid-top-contact-container p {
+	color: inherit;
 	font-size: 200%;
 }
 
