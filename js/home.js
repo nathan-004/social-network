@@ -9,7 +9,7 @@ var mouseCheck = false;
 var clickCheck = false;
 
 var themesElements = {
-    "sidePanels": ["left-container", "right-container", "html-footer", "html-header"],
+    "sidePanels": ["left-container", "right-container"],
     "midMessage": ["mid-messages-container"],
     "messageLeft": ["left-p"],
     "messageRight": ["right-p"],
@@ -80,7 +80,6 @@ document.getElementById("messageSender").addEventListener("submit", function(eve
         else {
             console.log(data.message);
         }
-		document.getElementById("message").value = "";
     })
     .catch(error => console.error(error));
 });
@@ -134,6 +133,7 @@ document.getElementById("colorSettingsContainer").addEventListener("mouseout", f
 });
 
 document.getElementById("colorSettings").addEventListener("click", function (event) {
+	console.log("click", clickCheck);
 	if (clickCheck) {
 		document.getElementById("colorSettings").style.display = "none";
 	}
@@ -188,7 +188,7 @@ document.getElementById("colorElement").addEventListener("input", function (e) {
     changeColor();
 });
 
-function acceptContact(contactName, mode=1) {
+function acceptContact(contactName) {
     fetch("http://127.0.0.1:5000/acceptcontactrequest", {
         method: "POST",
         headers: {
@@ -197,7 +197,6 @@ function acceptContact(contactName, mode=1) {
         body: JSON.stringify({
             "username": username,
             "request_username": contactName,
-			"mode": mode,
         })
     })
     .then(response => response.json()) // Convertir la réponse en json
@@ -238,7 +237,7 @@ function addRequestContainer(profileName, profileImage="https://imgs.search.brav
     let refuseButton = document.createElement("button");
     refuseButton.textContent = "Refuser";
     refuseButton.addEventListener("click", () => {
-        acceptContact(profileName, 0);
+        
     });
 
     // Ajouter les boutons dans la div
@@ -327,6 +326,7 @@ function setContactRequests() {
         document.querySelector(".accept-contact-container").innerHTML = ""; // Efface le contenu de la div
         if (requests.length != 0) {
             for (i = 0, len = requests.length; i < len; i++) {
+                console.log(len);
                 addRequestContainer(requests[i]);
             }
         }
@@ -427,6 +427,7 @@ async function setMessages() { // Fonctionnement asynchrone
                     globalLastMessage = messages[messages.length - 1];
                 }
                 changeTheme(globalTheme);
+                console.log(globalTheme);
             }
         } catch (error) {
             console.error(error);
@@ -452,6 +453,7 @@ function changeTheme(themeName, start_=false) {
             document.querySelectorAll("." + themesElements[key][i]).forEach(function(element) {
                 if (!start_) {
                     for (let j = 0; j < themes.length; j++) {
+                        console.log(themes[j] + "-theme-" + key);
                         element.classList.remove(themes[j] + "-theme-" + key);
                     }
                 }

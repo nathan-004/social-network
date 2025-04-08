@@ -138,7 +138,6 @@ button:hover {
 .contrast-theme-mid {
     border: 3px white;
     background-color: black;
-	color:white;
 }
 
 /*Thème bleu ----------------------------*/
@@ -213,6 +212,7 @@ body {
 
 /* Barre du haut */
 header {
+    background: #333;
     color: white;
     padding: 10px;
     text-align: center;
@@ -255,6 +255,7 @@ main {
 
 /* Barre du bas */
 footer {
+    background: #333;
     color: white;
     padding: 10px;
     text-align: center;
@@ -273,11 +274,9 @@ footer {
     gap: 5px;
     position:relative;
     width: 100%;
-	color: inherit;
 }
 
 .close-button-container button {
-	color: inherit;
     margin-right: 5px;
     float: right;
     background-color: #33333300;
@@ -293,7 +292,6 @@ footer {
     text-align: center;
     overflow-y: auto;
     max-height: 87.5%;
-	color: inherit;
 }
 
 .left-contact-link {
@@ -302,7 +300,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     background: #44444400;
-    color: inherit;
+    color: white;
     text-decoration: none;
     padding: 8px;
 }
@@ -320,7 +318,7 @@ footer {
 /*----------------------------Gauche Raccourcis positionnements----------------------------*/
 .left-shortcuts-container {
     flex-grow: 1;
-    background-color: #7979792e;
+    background-color: #7979797e;
     margin: 0% 2%;
     border-radius: 3.5%;
 	display: flex;
@@ -365,16 +363,10 @@ footer {
 /*----------------------------Milieu Top----------------------------*/
 .mid-top-container {
     display: none;
-	color: inherit;
-}
-
-.mid-top-container a {
-	color: inherit;
 }
 
 /*----------------------------Milieu Contact Profil----------------------------*/
 .mid-top-contact-container {
-	color: inherit;
     flex-grow: 1;
 	display: flex;
 	align-items: center;
@@ -388,7 +380,6 @@ footer {
 }
 
 .mid-top-contact-container p {
-	color: inherit;
 	font-size: 200%;
 }
 
