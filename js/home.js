@@ -9,7 +9,7 @@ var mouseCheck = false;
 var clickCheck = false;
 
 var themesElements = {
-    "sidePanels": ["left-container", "right-container"],
+    "sidePanels": ["left-container", "right-container", "html-footer", "html-header"],
     "midMessage": ["mid-messages-container"],
     "messageLeft": ["left-p"],
     "messageRight": ["right-p"],
@@ -22,6 +22,8 @@ var pthemesElements = {
     "element-color-selection-container": [],
 }
 var pthemes = ["element-selection-container", "element-color-selection-container"]
+
+var pthemesChoices = {} // Sous forme élément : {selector : couleur}
 
 // Envoyer une demande de contact
 document.getElementById("rightVerifyContact").addEventListener("submit", function(event) {
@@ -80,6 +82,7 @@ document.getElementById("messageSender").addEventListener("submit", function(eve
         else {
             console.log(data.message);
         }
+		document.getElementById("message").value = "";
     })
     .catch(error => console.error(error));
 });
@@ -133,37 +136,38 @@ document.getElementById("colorSettingsContainer").addEventListener("mouseout", f
 });
 
 document.getElementById("colorSettings").addEventListener("click", function (event) {
-	console.log("click", clickCheck);
 	if (clickCheck) {
 		document.getElementById("colorSettings").style.display = "none";
 	}
 });
 
-for (let key in pthemesElements) {
-    document.querySelectorAll("." + key).forEach(function(element) {
+for (let key in pthemesElements) { // Itération sur les lignes de boutons
+    document.querySelectorAll("." + key).forEach(function(element) { // Itération sur tous les boutons
         var children = element.children;
-        for (let i = 0; i < children.length; i++) {
-            children[i].addEventListener("click", function (e) {
-                changeTheme("personnalisable")
-                if (!pthemesElements[key].includes(children[i].value)) {
-                    if (key != pthemes[pthemes.length-1]) {
+        for (let i = 0; i < children.length; i++) { // Itération sur tous les boutons
+            children[i].addEventListener("click", function (e) { // Ajout d'un onclick
+                changeTheme("personnalisable");
+                if (!pthemesElements[key].includes(children[i].value)) { // Si l'élément n'est pas déjà sélectionné
+                    if (key != pthemes[pthemes.length-1]) { // Afficher la ligne suivante
                         document.querySelector("." + pthemes[pthemes.indexOf(key)+1]).style.display = "initial";
                     }
                     else {
                         document.querySelector(".color-selection-container").style.display = "initial";
                     }
+					// Modifier style bouton
                     children[i].style.border = "2px solid yellow";
                     children[i].style.background = "rgb(255, 255, 153)";
                     pthemesElements[key].push(children[i].value);
                 }
-                else {
+                else { // Si élément déjà présent
+					// Style de base
                     children[i].style.border = "2px outset buttonborder";
                     children[i].style.background = "buttonface";
-                    const index = pthemesElements[key].indexOf(children[i].value);
+                    const index = pthemesElements[key].indexOf(children[i].value); // Trouver l'index de l'élément
                     if (index > -1) { 
-                        pthemesElements[key].splice(index, 1);
+                        pthemesElements[key].splice(index, 1); // Enlever élément de la liste
                     }
-                    if (pthemesElements[key].length == 0) {
+                    if (pthemesElements[key].length == 0) { // Enlever lignes non nécessaires
                         document.querySelector(".color-selection-container").style.display = "none";
 
                         if (key == pthemes[0]) {
@@ -185,10 +189,11 @@ for (let key in pthemesElements) {
 }
 
 document.getElementById("colorElement").addEventListener("input", function (e) {
-    changeColor();
+    changeColor(true);
+	changeColor();
 });
 
-function acceptContact(contactName) {
+function acceptContact(contactName, mode=1) {
     fetch("http://127.0.0.1:5000/acceptcontactrequest", {
         method: "POST",
         headers: {
@@ -197,6 +202,7 @@ function acceptContact(contactName) {
         body: JSON.stringify({
             "username": username,
             "request_username": contactName,
+			"mode": mode,
         })
     })
     .then(response => response.json()) // Convertir la réponse en json
@@ -237,7 +243,7 @@ function addRequestContainer(profileName, profileImage="https://imgs.search.brav
     let refuseButton = document.createElement("button");
     refuseButton.textContent = "Refuser";
     refuseButton.addEventListener("click", () => {
-        
+        acceptContact(profileName, 0);
     });
 
     // Ajouter les boutons dans la div
@@ -326,7 +332,6 @@ function setContactRequests() {
         document.querySelector(".accept-contact-container").innerHTML = ""; // Efface le contenu de la div
         if (requests.length != 0) {
             for (i = 0, len = requests.length; i < len; i++) {
-                console.log(len);
                 addRequestContainer(requests[i]);
             }
         }
@@ -427,7 +432,6 @@ async function setMessages() { // Fonctionnement asynchrone
                     globalLastMessage = messages[messages.length - 1];
                 }
                 changeTheme(globalTheme);
-                console.log(globalTheme);
             }
         } catch (error) {
             console.error(error);
@@ -453,7 +457,6 @@ function changeTheme(themeName, start_=false) {
             document.querySelectorAll("." + themesElements[key][i]).forEach(function(element) {
                 if (!start_) {
                     for (let j = 0; j < themes.length; j++) {
-                        console.log(themes[j] + "-theme-" + key);
                         element.classList.remove(themes[j] + "-theme-" + key);
                     }
                 }
@@ -463,23 +466,42 @@ function changeTheme(themeName, start_=false) {
     }   
 }
 
-function changeColor() {
-    for (let i = 0; i < pthemesElements["element-selection-container"].length; i++) { // Toutes les valeurs reçues
-        for (let j = 0; j < themesElements[pthemesElements["element-selection-container"][i]].length; j++) { // Toutes les classes voulues
-            for (let k = 0; k < pthemesElements["element-color-selection-container"].length; k++) { // Tous les éléments à modifier
-                var element_ = pthemesElements["element-color-selection-container"][k];
-                var className = themesElements[pthemesElements["element-selection-container"][i]][j];
-                var color = document.getElementById("colorElement").value;
-                if (element_ == "border") {
-                    color = "2px solid " + color;
-                }
-
-                document.querySelectorAll("." + className).forEach(function (element) {
-                    element.style.setProperty(element_, color);
-                });
-            }
-        }
-    }
+function changeColor(val=false) {
+	if (val) {
+		for (let i = 0; i < pthemesElements["element-selection-container"].length; i++) { // Tous les éléments reçus
+			var element_ = pthemesElements["element-selection-container"][i]; // Clé de themesElements
+			for (let k = 0; k < pthemesElements["element-color-selection-container"].length; k++) {
+				var selector = pthemesElements["element-color-selection-container"][k];
+				var color = document.getElementById("colorElement").value;
+				
+				if (element_ in pthemesChoices) {
+					pthemesChoices[element_][selector] = color;
+				}
+				else {
+					pthemesChoices[element_] = {selector: color};
+				}
+			}
+		}
+	}
+	else {
+		for (element_ in pthemesChoices) {
+			for (classNameIdx in themesElements[element_]) {
+				for (selector in pthemesChoices[element_]) {
+					var className = themesElements[element_][classNameIdx];
+					var color = pthemesChoices[element_][selector];
+					
+					// console.log(className, selector, color);
+					if (selector == "border") {
+						color = "2px solid " + color;
+					}
+					
+					document.querySelectorAll("." + className).forEach(function (element) {
+						element.style.setProperty(selector, color);
+					});
+				}
+			}
+		}
+	}
 }
 
 function main() {
