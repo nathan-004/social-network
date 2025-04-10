@@ -129,10 +129,23 @@ class Database():
             for name in a:
                 if name == request_username:
                     contacts_requests.pop(contacts_requests.index(request_username))
-                    print(contacts_requests)
             self.cursor.execute("UPDATE users SET contacts_request_in=? WHERE username=?", (json.dumps(contacts_requests), username))
             self.conn.commit()
 
+            return 0
+        else:
+            return 1
+        
+    def refuse_contact_request(self, username, request_username):
+        contacts_requests = self.get_data(username, "contacts_request_in")
+        
+        if request_username in contacts_requests:
+            a = contacts_requests.copy()
+            for name in a:
+                if name == request_username:
+                    contacts_requests.pop(contacts_requests.index(request_username))
+            self.cursor.execute("UPDATE users SET contacts_request_in=? WHERE username=?", (json.dumps(contacts_requests), username))
+            self.conn.commit()
             return 0
         else:
             return 1
