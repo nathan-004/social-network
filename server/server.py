@@ -83,7 +83,7 @@ def login():
 
 @app.route('/addcontactrequest', methods=["POST", "OPTIONS"])
 @cors_handler
-def getuser():
+def addcontactrequest():
     data = request.get_json()
     username = data.get("username")
     contact_username = data.get("contact_username")
@@ -137,18 +137,22 @@ def acceptcontactrequests():
     data = request.get_json()
     username = data.get("username")
     contact_request = data.get("request_username")
+    mode = data.get("mode")
 
     response = {"code": 0,
         "message": "test",
         }
     
     db_profile = Database()
-
-    if db_profile.accept_contact_request(username, contact_request) == 0:
-        response["message"] = "Contact ajouté"
+    if mode == 0:
+        db_profile.refuse_contact_request(username, contact_request)
+        response["message"] = "Demande de contact refusée"
     else:
-        response["code"] = 1
-        response["message"] = "Erreur innatendue"
+        if db_profile.accept_contact_request(username, contact_request) == 0:
+            response["message"] = "Contact ajouté"
+        else:
+            response["code"] = 1
+            response["message"] = "Erreur innatendue"
 
     print("Utilisateur: "+ username, "Reponse: " + response["message"])
 
