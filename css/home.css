@@ -8,6 +8,25 @@ button:hover {
     cursor: pointer;
 }
 
+/*----------------------------Fenêtre de paramètres de profil----------------------------*/
+#profileSettingsContainer {
+	display: none;
+	position: fixed;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0, 0.5);
+	z-index: 1;
+}
+
+#profileContentContainer {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	background-color: white;
+}
+
 /*----------------------------Fenêtre de paramètres de couleur-------------------------*/
 #colorSettings {
 	display: none;
@@ -138,6 +157,7 @@ button:hover {
 .contrast-theme-mid {
     border: 3px white;
     background-color: black;
+	color: white;
 }
 
 /*Thème bleu ----------------------------*/
@@ -332,6 +352,10 @@ footer {
     align-items: center;
     width: 100%;
     gap : 20px;
+}
+
+.left-profile-container:hover {
+	cursor: pointer;
 }
 
 .left-shortcuts-container img {

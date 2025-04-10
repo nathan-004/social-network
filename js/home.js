@@ -193,6 +193,11 @@ document.getElementById("colorElement").addEventListener("input", function (e) {
 	changeColor();
 });
 
+document.getElementById("leftProfileSettings").addEventListener("click", function (e) {
+	document.getElementById("profileSettingsContainer").style.display = "block";
+});
+
+
 function acceptContact(contactName, mode=1) {
     fetch("http://127.0.0.1:5000/acceptcontactrequest", {
         method: "POST",

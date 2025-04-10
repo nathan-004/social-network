@@ -8,11 +8,26 @@
     <link rel="stylesheet" type="text/css" href="./css/home_mobile.css">
 </head>
 <body>
-
     <!-- Barre du haut -->
-    <header>
+    <header class="html-header">
         <h2>SYNK</h2>
     </header>
+	
+	<div id="profileSettingsContainer">
+		<div id="profileContentContainer">
+			<div id="topProfileSettingsBanner">
+				<h3>Paramètres de profil</h3>
+			</div>
+			<div id="profileMidContainer">
+				<div id="topProfileContent">
+				</div>
+				
+				<div id="profileSettings">
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div id="colorSettings">
 		<div id="colorSettingsContainer">
 			<div id="topBanner">
@@ -62,7 +77,7 @@
             <div class="left-contacts-container">
             </div>
             <div class="left-shortcuts-container"> <!--Profile de l'utilisateur, Paramètres raccourci-->
-                <div class="left-profile-container">
+                <div class="left-profile-container" id="leftProfileSettings">
                     <img src="https://imgs.search.brave.com/GkAIuY4uQSRlbLRd1mseDZNRj6Bx_rQEz2b-y_8gaf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJmLzE1/L2YyLzJmMTVmMmU4/YzY4OGIzMTIwZDNk/MjY0NjdiMDYzMzBj/LmpwZw" alt="Image de profile de l'utilisateur">
                     <p class="username">Utilisateur connecté</p>
                 </div>
@@ -138,7 +153,7 @@
     </main>
 
     <!-- Barre du bas -->
-    <footer>
+    <footer class="html-footer">
         <h2>Attention !</h2>
         <p>Ne partagez aucune donnée confidentielle.</p>
     </footer>
