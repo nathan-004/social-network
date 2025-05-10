@@ -1,7 +1,7 @@
 # SYNK
 
 - [Fonctionnement](#fonctionnement)
-  - [Connection]()
+  - [Connection](#connection)
 
 ---
 
